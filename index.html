@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>田伟斌的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="田伟斌的博客">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="田伟斌的博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="田伟斌的博客">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/roben.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Weibin Tian</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/roben0921" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/bin-wo" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Weibin Tian</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/roben.jpeg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Weibin Tian</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/roben0921" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/bin-wo" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        
+  
+    <article id="post-immutable" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/25/immutable/">immutable.js 技术分享感悟</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>周五有一次前端技术分享会，有位同学提出了ImmutableJs。下面我们来了解一下。</p>
+<h4 id="什么是Immuutable-Data"><a href="#什么是Immuutable-Data" class="headerlink" title="什么是Immuutable Data"></a>什么是Immuutable Data</h4><p>不可变数据，指一旦被创造后，就不可以被改变的数据。</p>
+<p>举个Mutable Data的栗子🌰</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var data1=&#123;a:1,b:2&#125;;</div><div class="line">var data2=data1;</div><div class="line">data2.a=2;</div><div class="line">console.log(data1.a)//2</div></pre></td></tr></table></figure>
+<p>什么意思呢？这就是js中的引用类型。js在创建data1变量时，在内存中申请了一块内存，返回变量引用地址。相当于一个老板开了一间店铺拥有一把钥匙。</p>
+<p>在创建data2时，并没有在内存中重新申请新的内存，而是和data1共享同一块内存，返回变量引用地址。相当于又来了一个老板又拥有一把钥匙，两个人一起管理这家店铺🏠。</p>
+<p>两个变量相互影响，一方修改数据都会影响另一方。相爱相杀。</p>
+<p>当然这样也会有一些优点，但是在大型应用开发中，总会埋下一些雷…珍重为好，所以提出了Immutable Data。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/09/25/immutable/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/09/25/immutable/" class="archive-article-date">
+  	<time datetime="2016-09-25T13:20:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-25</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据传递/">数据传递</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-bable转码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/06/bable转码/">Bable转码器用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://babeljs.io/">Babel</a>是一个广泛使用的ES6转码器，可以将ES6代码转为ES5代码，从而在现有环境执行。这意味着，你可以用ES6的方式编写程序，又不用担心现有环境是否支持。下面是一个例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 转码前</div><div class="line">input.map(item =&gt; item + 1);</div><div class="line"></div><div class="line">// 转码后</div><div class="line">input.map(function (item) &#123;</div><div class="line">  return item + 1;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>头函数，这个特性还没有得到广泛支持，Babel将其转为普通函数，就能在现有的JavaScript环境执行了。</p>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/06/06/bable转码/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/06/06/bable转码/" class="archive-article-date">
+  	<time datetime="2016-06-06T14:12:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-06</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转码/">转码</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-开发工具" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/06/开发工具/">前端开发工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###个人常用的一部分开发工具</p>
+<ul>
+<li><p><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">cmd Markdown</a> 作业部落出版的Markdown编辑器</p>
+</li>
+<li><p><a href="https://github.com/rest-client/rest-client" target="_blank" rel="external">RESTClient</a> 一个开源的客户端HTTP调试工具。</p>
+</li>
+<li><p><a href="https://github.com/getlantern/lantern" target="_blank" rel="external">lantern</a> 蓝灯,一款开源的翻墙工具。</p>
+</li>
+<li><p><a href="https://www.charlesproxy.com/" target="_blank" rel="external">Charles</a> 青花瓷, 一款HTTP/HTTPS的抓包工具。<a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="external">Charles 从入门到精通</a></p>
+</li>
+<li><p><a href="http://www.sublimetext.com/" target="_blank" rel="external">Sublime</a> 一款强大的IDE,支持Python、JS、JSON格式化等等…更重要的是<code>Sublime</code>支持的插件很多。<a href="http://www.xuanfengge.com/practical-collection-of-sublime-plug-in.html" target="_blank" rel="external">实用的sublime插件集合</a></p>
+</li>
+<li><p><a href="https://www.sourcetreeapp.com/" target="_blank" rel="external">SourceTree</a> 一个图形化的操作github操作软件，容易上手，适合对命令行不是很熟悉的同学</p>
+</li>
+<li><p>​<a href="https://github.com/facebook/react-devtools/releases" target="_blank" rel="external">react-devtools</a>React Devtools是React官方提供的类似于浏览器调试台的插件。通过在浏览器中安装这个插件，可以查看组件的层次、各个组件的Props、States等信息。并且它的使用方式也很简单。<br>注意： 如果是Chrome浏览器就下载.crx后缀的文件。如果是FirFox浏览器请下载.xpi后缀结尾的文件。</p>
+</li>
+<li><p><a href="http://www.sketchcn.com/" target="_blank" rel="external">sketch</a>这是一款轻量已用的适量设计工具<a href="http://www.sketchcn.com/sketch-tips-tricks-1.html" target="_blank" rel="external">插件集合</a>方便做设计的同学使用，可以自己绘制UI图</p>
+<p>​</p>
+</li>
+</ul>
+<p>​    暂时想到的就这么多~ 如果有新的好玩的 易用的，欢迎补充！！！</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/05/06/开发工具/" class="archive-article-date">
+  	<time datetime="2016-05-06T13:30:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-05-06</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-css制作一个三角" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/25/css制作一个三角/">如何用css写出一个三角</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>绘制三角形用到的是border，现在讲一下原理。</p>
+<p>先来一个div，div的宽度高度均设为0px。只设置border。</p>
+<p>css样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">.border&#123;</div><div class="line">    width：0px;</div><div class="line">    height:0px;</div><div class="line">    border:solid;</div><div class="line">    border-top-width:50px;</div><div class="line">    border-top-color:red;</div><div class="line">    border-right-width:50px;</div><div class="line">    border-right-color:yellow;</div><div class="line">    border-bottom-width:50px;</div><div class="line">    border-bottom-color:green;</div><div class="line">    border-left-width:50px;</div><div class="line">    border-left-color:blue;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p class="article-more-link">
+          <a class="article-more-a"  href="/2016/04/25/css制作一个三角/#more">more >></a>
+        </p>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/25/css制作一个三角/" class="archive-article-date">
+  	<time datetime="2016-04-25T13:16:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-25</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/绘图/">绘图</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Weibin Tian
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: true,
+		isPost: false,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据传递/" style="font-size: 10px;">数据传递</a> <a href="/tags/绘图/" style="font-size: 10px;">绘图</a> <a href="/tags/转码/" style="font-size: 10px;">转码</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">热爱前端&lt;br&gt;两年菜鸟&lt;br&gt;努力赶超ing&lt;br&gt;QQ:158692797&lt;br&gt;邮箱:roben0921@sina.com</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

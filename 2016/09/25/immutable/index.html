@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>immutable.js 技术分享感悟 | 田伟斌的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="周五有一次前端技术分享会，有位同学提出了ImmutableJs。下面我们来了解一下。
+什么是Immuutable Data不可变数据，指一旦被创造后，就不可以被改变的数据。
+举个Mutable Data的栗子🌰
+1234var data1=&amp;#123;a:1,b:2&amp;#125;;var data2=data1;data2.a=2;console.log(data1.a)//2
+什么意思呢？这就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="immutable.js 技术分享感悟">
+<meta property="og:url" content="http://yoursite.com/2016/09/25/immutable/index.html">
+<meta property="og:site_name" content="田伟斌的博客">
+<meta property="og:description" content="周五有一次前端技术分享会，有位同学提出了ImmutableJs。下面我们来了解一下。
+什么是Immuutable Data不可变数据，指一旦被创造后，就不可以被改变的数据。
+举个Mutable Data的栗子🌰
+1234var data1=&amp;#123;a:1,b:2&amp;#125;;var data2=data1;data2.a=2;console.log(data1.a)//2
+什么意思呢？这就是">
+<meta property="og:image" content="http://o77lm3ogm.bkt.clouddn.com/immutable-js-share.gif">
+<meta property="og:image" content="http://o77lm3ogm.bkt.clouddn.com/immutable-js-share.gif">
+<meta property="og:updated_time" content="2016-11-11T03:13:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="immutable.js 技术分享感悟">
+<meta name="twitter:description" content="周五有一次前端技术分享会，有位同学提出了ImmutableJs。下面我们来了解一下。
+什么是Immuutable Data不可变数据，指一旦被创造后，就不可以被改变的数据。
+举个Mutable Data的栗子🌰
+1234var data1=&amp;#123;a:1,b:2&amp;#125;;var data2=data1;data2.a=2;console.log(data1.a)//2
+什么意思呢？这就是">
+<meta name="twitter:image" content="http://o77lm3ogm.bkt.clouddn.com/immutable-js-share.gif">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/roben.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Weibin Tian</a></h1>
+		</hgroup>
+
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/roben0921" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/bin-wo" title="zhihu">zhihu</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Weibin Tian</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/roben.jpeg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Weibin Tian</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/roben0921" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/bin-wo" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-immutable" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      immutable.js 技术分享感悟
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>周五有一次前端技术分享会，有位同学提出了ImmutableJs。下面我们来了解一下。</p>
+<h4 id="什么是Immuutable-Data"><a href="#什么是Immuutable-Data" class="headerlink" title="什么是Immuutable Data"></a>什么是Immuutable Data</h4><p>不可变数据，指一旦被创造后，就不可以被改变的数据。</p>
+<p>举个Mutable Data的栗子🌰</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var data1=&#123;a:1,b:2&#125;;</div><div class="line">var data2=data1;</div><div class="line">data2.a=2;</div><div class="line">console.log(data1.a)//2</div></pre></td></tr></table></figure>
+<p>什么意思呢？这就是js中的引用类型。js在创建data1变量时，在内存中申请了一块内存，返回变量引用地址。相当于一个老板开了一间店铺拥有一把钥匙。</p>
+<p>在创建data2时，并没有在内存中重新申请新的内存，而是和data1共享同一块内存，返回变量引用地址。相当于又来了一个老板又拥有一把钥匙，两个人一起管理这家店铺🏠。</p>
+<p>两个变量相互影响，一方修改数据都会影响另一方。相爱相杀。</p>
+<p>当然这样也会有一些优点，但是在大型应用开发中，总会埋下一些雷…珍重为好，所以提出了Immutable Data。</p>
+<a id="more"></a>
+<h3 id="JS模拟Immutable-Data"><a href="#JS模拟Immutable-Data" class="headerlink" title="JS模拟Immutable Data"></a>JS模拟Immutable Data</h3><p>原声JS模拟Immutable Data的方法就是深拷贝deep clone。</p>
+<p>对了，在分享会上马哥着重强调了一下引用类型的赋值、浅拷贝和深拷贝的区别。</p>
+<p>可是后来我发现一个问题啊，网上对浅拷贝的定义发现有歧义，一部分认为是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; a:1, arr: [1,2] &#125;;</div><div class="line">var obj1 = obj;            //浅复制</div><div class="line">var obj2 = deepCopy(obj);  //深复制</div></pre></td></tr></table></figure>
+<p>另一部分人认为浅拷贝是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function extendCopy(obj)&#123;</div><div class="line">    var newObj=&#123;&#125;;</div><div class="line">    for(var i in obj)&#123;</div><div class="line">        newObj[i]=obj[i];</div><div class="line">    &#125;</div><div class="line">    return newObj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>嗯，我们采取第二种嗯。就酱…</p>
+<p>贴段JS模拟ImmutableJS的代码，也就是Deep Clone。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function extendDeepCopy(obj,newObj)&#123;</div><div class="line">    var newObj = newObj || &#123;&#125;;</div><div class="line">    for(var i in obj)&#123;</div><div class="line">        if(typeof obj[i] == &apos;object&apos;)&#123;</div><div class="line">            newObj[i]=(obj[i].constructor===Array)?[]:&#123;&#125;;</div><div class="line">            extendDeepCopy(obj[i],newObj[i]);</div><div class="line">        &#125;else&#123;</div><div class="line">            newObj[i]=obj[i];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return newObj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是的，非常慢非常慢非常慢。每次更改都会克隆所有的节点，天啊，想象一下。</p>
+<p>然后，就有了ImmutableJS。</p>
+<h4 id="Immutable-js出场"><a href="#Immutable-js出场" class="headerlink" title="Immutable.js出场"></a>Immutable.js出场</h4><p>Immutable.js的出现源于Functional Programming的思想，即所有数据应该是复制过来，而不是直接修改。</p>
+<p>由facebook开源的一个项目，主要是为了解决javascript Immutable Data的问题，通过参考hash maps tries和vector tries提供了一种更有效的方式。</p>
+<p>简单的来讲，immutable.js通过structural sharing来解决的性能问题。</p>
+<p><img src="http://o77lm3ogm.bkt.clouddn.com/immutable-js-share.gif" alt="image"></p>
+<p>当我们发生一个set操作的时候，immutable.js会只clone它的父级别以上的部分，其他保持不变，这样大家可以共享同样的部分，可以大大提高性能。</p>
+<p>举栗子🌰</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var a=&#123;</div><div class="line">        a:1,</div><div class="line">        b:2,</div><div class="line">        c:&#123;</div><div class="line">            ca:1,</div><div class="line">            cb:&#123;</div><div class="line">                cba:2,</div><div class="line">                cbb:&#123;</div><div class="line">                    cbba:3</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="Immutable-js分享"><a href="#Immutable-js分享" class="headerlink" title="Immutable.js分享"></a>Immutable.js分享</h3><p>周五有一次前端技术分享会，有位同学提出了ImmutableJs。下面我们来了解一下。</p>
+<h4 id="什么是Immuutable-Data-1"><a href="#什么是Immuutable-Data-1" class="headerlink" title="什么是Immuutable Data"></a>什么是Immuutable Data</h4><p>不可变数据，指一旦被创造后，就不可以被改变的数据。</p>
+<p><strong>举个Mutable Data的栗子🌰</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var data1=&#123;a:1,b:2&#125;;var data2=data1;data2.a=2;console.log(data1.a)//2</div></pre></td></tr></table></figure>
+<p>什么意思呢？这就是js中的引用类型。js在创建data1变量时，在内存中申请了一块内存，返回变量引用地址。相当于一个老板开了一间店铺拥有一把钥匙。</p>
+<p>在创建data2时，并没有在内存中重新申请新的内存，而是和data1共享同一块内存，返回变量引用地址。相当于又来了一个老板又拥有一把钥匙，两个人一起管理这家店铺🏠。</p>
+<p>两个变量相互影响，一方修改数据都会影响另一方。相爱相杀。</p>
+<p>当然这样也会有一些优点，但是在大型应用开发中，总会埋下一些雷…珍重为好，所以提出了Immutable Data。</p>
+<h3 id="JS模拟Immutable-Data-1"><a href="#JS模拟Immutable-Data-1" class="headerlink" title="JS模拟Immutable Data"></a>JS模拟Immutable Data</h3><p>原声JS模拟Immutable Data的方法就是深拷贝deep clone。</p>
+<p>对了，在分享会上马哥着重强调了一下引用类型的赋值、浅拷贝和深拷贝的区别。</p>
+<p>可是后来我发现一个问题啊，网上对浅拷贝的定义发现有歧义，一部分认为是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; a:1, arr: [1,2] &#125;;var obj1 = obj;            //浅复制var obj2 = deepCopy(obj);  //深复制</div></pre></td></tr></table></figure>
+<p>另一部分人认为浅拷贝是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">function extendCopy(obj)&#123;    var newObj=&#123;&#125;;    for(var i in obj)&#123;        newObj[i]=obj[i];    &#125;    return newObj;&#125;</div></pre></td></tr></table></figure>
+<p>嗯，我们采取第二种嗯。就酱…</p>
+<p>贴段JS模拟ImmutableJS的代码，也就是Deep Clone。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">function extendDeepCopy(obj,newObj)&#123;    var newObj = newObj || &#123;&#125;;    for(var i in obj)&#123;        if(typeof obj[i] == &apos;object&apos;)&#123;            newObj[i]=(obj[i].constructor===Array)?[]:&#123;&#125;;            extendDeepCopy(obj[i],newObj[i]);        &#125;else&#123;            newObj[i]=obj[i];        &#125;    &#125;    return newObj;&#125;</div></pre></td></tr></table></figure>
+<p>是的，非常慢非常慢非常慢。每次更改都会克隆所有的节点，天啊，想象一下。</p>
+<p>然后，就有了ImmutableJS。</p>
+<h4 id="Immutable-js出场-1"><a href="#Immutable-js出场-1" class="headerlink" title="Immutable.js出场"></a>Immutable.js出场</h4><p>Immutable.js的出现源于Functional Programming的思想，即所有数据应该是复制过来，而不是直接修改。</p>
+<p>由facebook开源的一个项目，主要是为了解决javascript Immutable Data的问题，通过参考hash maps tries和vector tries提供了一种更有效的方式。</p>
+<p>简单的来讲，immutable.js通过structural sharing来解决的性能问题。</p>
+<p><img src="http://o77lm3ogm.bkt.clouddn.com/immutable-js-share.gif" alt="image"></p>
+<p>当我们发生一个set操作的时候，immutable.js会只clone它的父级别以上的部分，其他保持不变，这样大家可以共享同样的部分，可以大大提高性能。</p>
+<p>举栗子🌰</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var a=&#123;</div><div class="line">        a:1,</div><div class="line">        b:2,</div><div class="line">        c:&#123;</div><div class="line">            ca:1,</div><div class="line">            cb:&#123;</div><div class="line">                cba:2,</div><div class="line">                cbb:&#123;</div><div class="line">                    cbba:3</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>如果我们修改a.c.cb.cba，对a对象进行特殊深copy，怎么特殊？a.c.cb.cbb不会被copy，还是共享相同内存，为引用类型。因为Immutablejs只会clone它的父级别以上的部分，个人理解，表述错误欢迎指正…</p>
+<p>以上就是Immutablejs提高性能的远离，据估计可以提升十倍呢…强大到不能直视…</p>
+<h4 id="为什么你要在React-js中使用Immutable-Data"><a href="#为什么你要在React-js中使用Immutable-Data" class="headerlink" title="为什么你要在React.js中使用Immutable Data"></a>为什么你要在React.js中使用Immutable Data</h4><p>熟悉React.js的都应该知道，React.js是一个UI = f(states)的框架，为了解决更新的问题，React.js使用了virtual dom，virtual dom通过diff修改dom，来实现高效的dom更新。</p>
+<p>听起来很完美吧，但是有一个问题。当state更新时，如果数据没变，你也会去做virtual dom的diff，这就产生了浪费。这种情况其实很常见。</p>
+<p>当然你可能会说，你可以使用PureRenderMixin来解决呀，PureRenderMixin是个好东西，我们可以用它来解决一部分的上述问题，但是如果你留心的话，你可以在文档中看到下面这段提示。</p>
+<blockquote>
+<p>This only shallowly compares the objects. If these contain complex data structures, it may produce false-negatives for deeper differences. Only mix into components which have simple props and state, or use forceUpdate() when you know deep data structures have changed. Or, consider using immutable objects to facilitate fast comparisons of nested data.</p>
+</blockquote>
+<p>也就是说，PureRenderMixin只是简单的浅比较，不使用于多层比较。那怎么办？？自己去做复杂比较的话，性能又会非常差。</p>
+<p>叮咚，方案就是使用immutable.</p>
+<p>React 做性能优化时有一个避免重复渲染的大招，就是使用 shouldComponentUpdate()，但它默认返回 true，即始终会执行render()方法，然后做 Virtual DOM 比较，并得出是否需要做真实 DOM 更新，这里往往会带来很多无必要的渲染并成为性能瓶颈。</p>
+<p>当然我们也可以在 shouldComponentUpdate() 中使用使用 deepCopy 和 deepCompare 来避免无必要的 render()，但 deepCopy 和 deepCompare 一般都是非常耗性能的。</p>
+<p>Immutable 则提供了简洁高效的判断数据是否变化的方法，只需===和is比较就能知道是否需要执行render()，而这个操作几乎 0 成本，所以可以极大提高性能。修改后的shouldComponentUpdate是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">shouldComponentUpdate: (nextProps = &#123;&#125;, nextState = &#123;&#125;) =&gt; &#123;</div><div class="line">  const thisProps = this.props || &#123;&#125;, thisState = this.state || &#123;&#125;;</div><div class="line"> </div><div class="line">  if (Object.keys(thisProps).length !== Object.keys(nextProps).length ||</div><div class="line">      Object.keys(thisState).length !== Object.keys(nextState).length) &#123;</div><div class="line">    return true;</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  for (const key in nextProps) &#123;</div><div class="line">    if (thisProps[key] !== nextProps[key] || ！is(thisProps[key], nextProps[key])) &#123;</div><div class="line">      return true;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  for (const key in nextState) &#123;</div><div class="line">    if (thisState[key] !== nextState[key] || ！is(thisState[key], nextState[key])) &#123;</div><div class="line">      return true;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：</p>
+<ol>
+<li>Immutable 降低了 Mutable 带来的复杂度。</li>
+<li>节省内存。</li>
+</ol>
+<p>Immutable.js使用了 Structure Sharing 会尽量复用内存。没有被引用的对象会被垃圾回收。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">import &#123; Map&#125; from &apos;immutable&apos;;</div><div class="line">let a = Map(&#123;</div><div class="line">  select: &apos;users&apos;,</div><div class="line">  filter: Map(&#123; name: &apos;Cam&apos; &#125;)</div><div class="line">&#125;)</div><div class="line">let b = a.set(&apos;select&apos;, &apos;people&apos;);</div><div class="line">a === b; // false</div><div class="line">a.get(&apos;filter&apos;) === b.get(&apos;filter&apos;); // true</div></pre></td></tr></table></figure>
+<p>上面 a 和 b 共享了没有变化的filter节点。</p>
+<ol>
+<li>Undo/Redo，Copy/Paste，甚至时间旅行这些功能做起来小菜一碟</li>
+</ol>
+<p>因为每次数据都是不一样的，只要把这些数据放到一个数组里储存起来，想回退到哪里就拿出对应数据即可，很容易开发出撤销重做这种功能。</p>
+<ol>
+<li>并发安全。</li>
+</ol>
+<p>传统的并发非常难做，因为要处理各种数据不一致问题，因此『聪明人』发明了各种锁来解决。但使用了 Immutable 之后，数据天生是不可变的，并发锁就不需要了。</p>
+<p>然而现在并没什么卵用，因为 JavaScript 还是单线程运行的啊。但未来可能会加入，提前解决未来的问题不也挺好吗？</p>
+<ol>
+<li>拥抱函数式编程</li>
+</ol>
+<p>Immutable 本身就是函数式编程中的概念，纯函数式编程比面向对象更适用于前端开发。因为只要输入一致，输出必然一致，这样开发的组件更易于调试和组装。</p>
+<p>像 ClojureScript，Elm 等函数式编程语言中的数据类型天生都是 Immutable 的，这也是为什么 ClojureScript 基于 React 的框架 — Om 性能比 React 还要好的原因。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/09/25/immutable/" class="archive-article-date">
+  	<time datetime="2016-09-25T13:20:00.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-09-25</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据传递/">数据传递</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/06/bable转码/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Bable转码器用法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Weibin Tian
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/数据传递/" style="font-size: 10px;">数据传递</a> <a href="/tags/绘图/" style="font-size: 10px;">绘图</a> <a href="/tags/转码/" style="font-size: 10px;">转码</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">热爱前端&lt;br&gt;两年菜鸟&lt;br&gt;努力赶超ing&lt;br&gt;QQ:158692797&lt;br&gt;邮箱:roben0921@sina.com</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
